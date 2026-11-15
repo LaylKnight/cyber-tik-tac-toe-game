@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------- shadcn/ui theme tokens (dark cyberpunk palette) ---------- */
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.13 0.03 265);
+  --foreground: oklch(0.96 0.02 220);
+  --card: oklch(0.16 0.04 265);
+  --card-foreground: oklch(0.96 0.02 220);
+  --popover: oklch(0.16 0.04 265);
+  --popover-foreground: oklch(0.96 0.02 220);
+  --primary: oklch(0.85 0.15 200);
+  --primary-foreground: oklch(0.15 0.03 265);
+  --secondary: oklch(0.25 0.05 265);
+  --secondary-foreground: oklch(0.96 0.02 220);
+  --muted: oklch(0.25 0.04 265);
+  --muted-foreground: oklch(0.7 0.04 240);
+  --accent: oklch(0.3 0.08 300);
+  --accent-foreground: oklch(0.96 0.02 220);
+  --destructive: oklch(0.65 0.24 15);
+  --border: oklch(0.4 0.1 220 / 40%);
+  --input: oklch(0.4 0.1 220 / 40%);
+  --ring: oklch(0.85 0.15 200);
+
+  /* game colours */
+  --neon-cyan: #38e8ff;
+  --neon-pink: #ff3ea5;
+  --neon-red: #ff4d5e;
+  --neon-green: #5dff8f;
+  --neon-yellow: #f8ff3a;
+  --neon-purple: #a855f7;
+  --neon-blue: #5b6cff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-pink: var(--neon-pink);
+  --color-neon-red: var(--neon-red);
+  --color-neon-green: var(--neon-green);
+  --color-neon-yellow: var(--neon-yellow);
+  --color-neon-purple: var(--neon-purple);
+  --color-neon-blue: var(--neon-blue);
+
+  --font-display: var(--font-orbitron), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-share-tech), ui-monospace, monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ---------- Background: deep space + perspective grid + stars ---------- */
+.cyber-bg {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(56, 232, 255, 0.18), transparent 50%),
+    radial-gradient(ellipse at 90% 100%, rgba(168, 85, 247, 0.18), transparent 55%),
+    radial-gradient(ellipse at 50% 50%, #0b1430 0%, #050816 70%);
+}
+
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(56, 232, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 232, 255, 0.09) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+}
+
+.cyber-stars {
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 30% 80%, rgba(56, 232, 255, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 70% 30%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 85% 65%, rgba(56, 232, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 55% 10%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 15% 60%, rgba(168, 85, 247, 0.7), transparent),
+    radial-gradient(1px 1px at 45% 45%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 92% 12%, rgba(255, 255, 255, 0.6), transparent);
+  background-size: 400px 400px;
+  animation: stars-drift 60s linear infinite;
+}
+
+@keyframes stars-drift {
+  from { background-position: 0 0; }
+  to { background-position: 400px 400px; }
+}
+
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* ---------- Chamfered (cut-corner) panels ---------- */
+.chamfer {
+  clip-path: polygon(
+    var(--cut, 18px) 0,
+    calc(100% - var(--cut, 18px)) 0,
+    100% var(--cut, 18px),
+    100% calc(100% - var(--cut, 18px)),
+    calc(100% - var(--cut, 18px)) 100%,
+    var(--cut, 18px) 100%,
+    0 calc(100% - var(--cut, 18px)),
+    0 var(--cut, 18px)
+  );
+}
+
+/* ---------- Neon text ---------- */
+.neon-text-cyan {
+  color: #b9f6ff;
+  text-shadow: 0 0 4px #38e8ff, 0 0 12px #38e8ff, 0 0 28px rgba(56, 232, 255, 0.7);
+}
+.neon-text-pink {
+  color: #ff8fa0;
+  text-shadow: 0 0 4px #ff4d5e, 0 0 12px #ff4d5e, 0 0 24px rgba(255, 77, 94, 0.6);
+}
+.neon-text-green {
+  color: #8dfff0;
+  text-shadow: 0 0 4px #38e8ff, 0 0 12px #2ee6c9, 0 0 24px rgba(46, 230, 201, 0.6);
+}
+.neon-text-yellow {
+  color: #fbff8a;
+  text-shadow: 0 0 4px #f8ff3a, 0 0 12px #f8ff3a, 0 0 26px rgba(248, 255, 58, 0.55);
+}
+
+/* ---------- Board grid lines (running neon light) ---------- */
+.neon-line {
+  background: linear-gradient(90deg, #a855f7 0%, #5b6cff 35%, #38e8ff 48%, #ffffff 50%, #38e8ff 52%, #5b6cff 65%, #a855f7 100%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 6px #a855f7, 0 0 14px #5b6cff, 0 0 28px rgba(168, 85, 247, 0.6);
+  border-radius: 9999px;
+  animation: grid-run-x 2.4s linear infinite;
+}
+.neon-line-v {
+  background: linear-gradient(180deg, #a855f7 0%, #5b6cff 35%, #38e8ff 48%, #ffffff 50%, #38e8ff 52%, #5b6cff 65%, #a855f7 100%);
+  background-size: 100% 200%;
+  animation: grid-run-y 2.4s linear infinite;
+}
+.neon-line-delay {
+  animation-delay: -1.2s;
+}
+.neon-line-paused {
+  animation-play-state: paused;
+}
+
+@keyframes grid-run-x {
+  from { background-position: 200% 0; }
+  to { background-position: 0% 0; }
+}
+@keyframes grid-run-y {
+  from { background-position: 0 200%; }
+  to { background-position: 0 0%; }
+}
+
+/* ---------- Animations ---------- */
+@keyframes mark-in {
+  0% { opacity: 0; transform: translateX(-4px) skewX(12deg); filter: brightness(2.2) hue-rotate(90deg) blur(2px); }
+  20% { opacity: 1; transform: translateX(4px) skewX(-8deg); filter: brightness(1.8) hue-rotate(-60deg); }
+  38% { opacity: 0.25; transform: translateX(-2px); filter: brightness(2.4); }
+  55% { opacity: 1; transform: translateX(2px) skewX(4deg); filter: brightness(1.5) hue-rotate(30deg); }
+  75% { opacity: 0.7; transform: translateX(-1px); filter: brightness(1.9); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+.animate-mark-in {
+  animation: mark-in 0.38s linear both;
+}
+
+@keyframes win-blink {
+  0%, 100% { opacity: 1; filter: brightness(1.3) drop-shadow(0 0 14px rgba(248, 255, 58, 0.7)); }
+  50% { opacity: 0.2; filter: brightness(0.6); }
+}
+.animate-win-blink {
+  animation: win-blink 0.6s steps(2, jump-none) infinite;
+}
+
+@keyframes glitch {
+  0%, 92%, 100% { transform: translate(0); text-shadow: inherit; }
+  93% { transform: translate(-2px, 1px); }
+  95% { transform: translate(2px, -1px); }
+  97% { transform: translate(-1px, 0); }
+}
+.animate-glitch {
+  animation: glitch 3s infinite;
+}
+
+@keyframes status-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.animate-status-flash {
+  animation: status-flash 0.5s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyber-stars,
+  .neon-line,
+  .neon-line-v,
+  .animate-glitch,
+  .animate-spin-slow {
+    animation: none;
+  }
+}
