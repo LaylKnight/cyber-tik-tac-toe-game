@@ -11,20 +11,22 @@ import { PauseModal } from "./pause-modal";
 import { RestartButton } from "./restart-button";
 import { RestartModal } from "./restart-modal";
 import { RulesModal } from "./rules-modal";
+import { StartModal } from "./start-modal";
 
 const TICK_MS = 100;
-const GITHUB_REPO_URL = "https://github.com/your-username/tik-tak-toe-game";
+const GITHUB_REPO_URL = "https://github.com/LaylKnight/cyber-tik-tak-toe-game";
 
 export function CyberTicTacToe() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
+  const [started, setStarted] = useState(false);
   const [rulesOpen, setRulesOpen] = useState(false);
   const [restartOpen, setRestartOpen] = useState(false);
   const { board, current, winner, winLine, isDraw, timeLeft, timedOut, paused, scores, draws } = state;
   const gameOver = winner !== null || isDraw;
 
-  // Turn timer — counts down only while the match is active and unpaused.
+  // Turn timer — counts down only while the match is started, active, and unpaused.
   useEffect(() => {
-    if (gameOver || paused || rulesOpen || restartOpen) return;
+    if (!started || gameOver || paused || rulesOpen || restartOpen) return;
     let last = performance.now();
     const id = window.setInterval(() => {
       const now = performance.now();
@@ -32,7 +34,7 @@ export function CyberTicTacToe() {
       last = now;
     }, TICK_MS);
     return () => window.clearInterval(id);
-  }, [gameOver, paused, rulesOpen, restartOpen]);
+  }, [started, gameOver, paused, rulesOpen, restartOpen]);
 
   let headline: string;
   let subline: string;
@@ -220,6 +222,11 @@ export function CyberTicTacToe() {
             </Button>
           </div>
 
+          <StartModal
+            open={!started && !rulesOpen}
+            onStart={() => setStarted(true)}
+            onOpenRules={() => setRulesOpen(true)}
+          />
           <RulesModal open={rulesOpen} onClose={() => setRulesOpen(false)} />
           <PauseModal
             open={paused && !gameOver}

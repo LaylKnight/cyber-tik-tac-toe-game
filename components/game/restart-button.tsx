@@ -11,7 +11,7 @@ export function RestartButton({ onClick, highlight }: { onClick: () => void; hig
         "chamfer p-0.5 transition-[filter] duration-300 [--cut:14px]",
         "bg-linear-to-r from-neon-yellow via-neon-green to-neon-yellow",
         highlight
-          ? "drop-shadow-[0_0_18px_rgba(248,255,58,0.8)]"
+          ? "animate-status-flash drop-shadow-[0_0_18px_rgba(248,255,58,0.8)]"
           : "drop-shadow-[0_0_10px_rgba(93,255,143,0.45)]"
       )}
     >
@@ -23,7 +23,7 @@ export function RestartButton({ onClick, highlight }: { onClick: () => void; hig
           "bg-linear-to-b from-[#1d2418] to-[#0b0f0a] hover:from-[#2a3520] hover:to-[#10160c]",
           "hover:bg-transparent active:scale-[0.98]"
         )}
-        aria-label="Restart: reboot match"
+        aria-label={highlight ? "Rematch: reboot match" : "Restart: reboot match"}
       >
         <span className="relative hidden size-9 items-center justify-center sm:flex sm:size-10">
           <span className="animate-spin-slow absolute inset-0 rounded-full border-2 border-dashed border-neon-green/60" />
@@ -34,7 +34,9 @@ export function RestartButton({ onClick, highlight }: { onClick: () => void; hig
           />
         </span>
         <span className="flex flex-col items-center leading-none sm:items-start">
-          <span className="neon-text-yellow text-lg font-black tracking-wider sm:text-xl">RESTART</span>
+          <span className="neon-text-yellow text-lg font-black tracking-wider sm:text-xl">
+            {highlight ? "REMATCH" : "RESTART"}
+          </span>
           <span className="mt-0.5 text-[10px] font-bold tracking-[0.18em] text-neon-green drop-shadow-[0_0_6px_#5dff8f] sm:text-xs">
             REBOOT MATCH
           </span>

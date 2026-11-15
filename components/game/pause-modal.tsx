@@ -53,18 +53,34 @@ export function PauseModal({ open, currentPlayer, onResume }: Props) {
             Up next: <span className="font-bold text-neon-cyan">{currentPlayer}</span>
           </p>
 
-          <div className="mt-6 flex justify-center">
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={onResume}
-              aria-label="Resume match"
-              title="Resume match"
-              className="h-auto gap-3 rounded-full border-2 border-neon-green/80 bg-[#081b18] px-8 py-3.5 text-base font-black tracking-widest text-neon-green uppercase shadow-[0_0_18px_rgba(93,255,143,0.65)] transition-all hover:scale-105 hover:bg-neon-green/20 hover:text-neon-green hover:shadow-[0_0_26px_rgba(93,255,143,0.9)] active:scale-95 sm:text-lg"
-            >
-              <Play className="size-6" strokeWidth={2.5} />
-              <span>Play</span>
-            </Button>
+          <div className="mt-8 flex justify-center">
+            <div className="chamfer bg-linear-to-r from-neon-yellow via-neon-green to-neon-yellow p-0.5 [--cut:14px] drop-shadow-[0_0_18px_rgba(248,255,58,0.8)] transition-[filter] duration-300">
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={onResume}
+                aria-label="Play: resume match"
+                title="Resume match"
+                className="chamfer group h-auto gap-3 rounded-none bg-linear-to-b from-[#1d2418] to-[#0b0f0a] px-6 py-2.5 [--cut:13px] hover:bg-transparent hover:from-[#2a3520] hover:to-[#10160c] active:scale-[0.98] sm:px-8 sm:py-3"
+              >
+                <span className="relative flex size-9 items-center justify-center sm:size-10">
+                  <span className="animate-spin-slow absolute inset-0 rounded-full border-2 border-dashed border-neon-green/60" />
+                  <span className="absolute inset-1 rounded-full border border-neon-green/40 shadow-[0_0_10px_rgba(93,255,143,0.5)_inset]" />
+                  <Play
+                    className="size-4 translate-x-px text-neon-green drop-shadow-[0_0_6px_#5dff8f] transition-transform duration-300 group-hover:scale-110 sm:size-5"
+                    strokeWidth={2.75}
+                  />
+                </span>
+                <span className="flex flex-col items-start leading-none">
+                  <span className="neon-text-yellow text-lg font-black tracking-wider sm:text-xl">
+                    PLAY
+                  </span>
+                  <span className="mt-0.5 text-[10px] font-bold tracking-[0.18em] text-neon-green drop-shadow-[0_0_6px_#5dff8f] sm:text-xs">
+                    RESUME MATCH
+                  </span>
+                </span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

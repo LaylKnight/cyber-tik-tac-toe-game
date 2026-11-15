@@ -81,8 +81,8 @@ public/img/                   # Served X and O mark assets (x.png, o.png)
 ### Run Locally
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/tik-tak-toe-game.git
-cd tik-tak-toe-game
+git clone https://github.com/LaylKnight/cyber-tik-tak-toe-game.git
+cd cyber-tik-tak-toe-game
 
 # 2. Install dependencies
 npm install
