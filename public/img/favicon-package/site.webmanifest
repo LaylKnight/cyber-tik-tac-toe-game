@@ -1,0 +1,19 @@
+{
+  "name": "Cyber T-T-T",
+  "short_name": "Cyber T-T-T",
+  "icons": [
+    {
+      "src": "/img/favicon-package/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/favicon-package/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#050816",
+  "background_color": "#050816",
+  "display": "standalone"
+}

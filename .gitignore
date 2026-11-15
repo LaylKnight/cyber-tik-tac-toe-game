@@ -24,3 +24,16 @@ npm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editor
+.vscode/
+
+# unused assets (not used by the web game or README)
+img/concept-ui.jpg
+img/game-reboot.png
+img/icon.png
+img/its-a-draw.png
+img/o.png
+img/on-pause.png
+img/player-2-turn.png
+img/x.png
