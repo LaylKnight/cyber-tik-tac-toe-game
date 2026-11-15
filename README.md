@@ -115,3 +115,10 @@ vercel --prod   # production deployment
 ```
 
 No environment variables or `vercel.json` configuration are required.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
